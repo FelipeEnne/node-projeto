@@ -11,9 +11,11 @@ app.use((req,res,next) => {
     next();
 })
 
-app.use('/',router);
 
 app.use(express.json());
+
+app.use('/',router);
+
 
 app.engine('mst', mustache(__dirname+'/views/partials', '.mst'));
 app.set('view engine', 'mst');

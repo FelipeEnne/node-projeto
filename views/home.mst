@@ -1,3 +1,5 @@
 {{> header}}
 
 <h1>HOME</h1>
+
+<p>Usuário: {{userInfo.name}}</p>
