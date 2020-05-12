@@ -1,0 +1,6 @@
+<h1>LOGIN</h1>
+
+<form>
+    <input type='text' name='user'/>
+    <button> Submit</button>
+</form>

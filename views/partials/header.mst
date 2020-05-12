@@ -1,1 +1,15 @@
-<h1>Header</h1>
+<html>
+    <head>
+
+        <title>{{pageTitle}}  {{h.defaultPageTitle}}</title>
+
+    </head>
+    <body>
+        <h1>Cabeçalho</h1>
+        <hr/>
+        <ul>
+            {{#h.menu}}
+                <li><a href="{{slug}}">{{name}}</a></li>
+            {{/h.menu}}
+        </ul>
+        <hr/>
