@@ -1,9 +1,5 @@
 const express = require('express');
-
-const router = express.Router();
-router.get('/', (req, res)=>{
-    res.send("Hola");
-})
+const router = require('./routes/index')
 
 
 const app = express();
