@@ -2,18 +2,15 @@ const express = require('express');
 
 const router = express.Router();
 router.get('/', (req, res)=>{
-    let nome = req.query.nome;
-    res.send("Hola "+nome);
-})
-
-router.get('/posts/:id', (req, res)=>{
-    let id = req.param.id;
-
-    res.send("ID");
-})
-
-router.get('/sobre', (req, res)=>{
-    res.send("sobre");
+    let obj = {
+        nome:'Felipe',
+        mostrar:true,
+        arr:[
+            {n:1},
+            {n:2}
+        ]
+    }
+    res.render('home',obj)
 })
 
 
