@@ -1,11 +1,3 @@
-<h1>Nome</h1>
+{{> header}}
 
-{{#mostrar}}
-<p>{{nome}}</p>
-{{/mostrar}}
-
-<ul>
-    {{#arr}}
-        <li>{{n}}</li>
-    {{/arr}}
-</ul>
+<h1>Página Home</h1>

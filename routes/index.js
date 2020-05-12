@@ -8,10 +8,10 @@ router.get('/', (req, res)=>{
         arr:[
             {n:1},
             {n:2}
-        ]
+        ],
+
     }
     res.render('home',obj)
 })
-
 
 module.exports = router;
