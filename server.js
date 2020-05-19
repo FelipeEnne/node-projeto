@@ -1,4 +1,3 @@
-const app = require('./app');
 const mongoose = require('mongoose');
 
 require('dotenv').config({path:'variable.env'})
@@ -13,6 +12,7 @@ mongoose.connection.on('error', (error) => {
 
 
 require("./models/Post")
+const app = require('./app');
 
 
 
