@@ -9,5 +9,8 @@ exports.add = (req, res)=>{
 exports.addAction = async (req, res)=>{
     const post = new Post(req.body);
     await post.save();
+
+    req.flash('sucess','post salvo')
+
     res.redirect('/')
 }

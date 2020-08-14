@@ -13,3 +13,14 @@
             {{/h.menu}}
         </ul>
         <hr/>
+        {{#flashes}}
+            {{#sucess}}
+                <div>{{.}}</div>
+            {{/sucess}}
+            {{#error}}
+                <div>{{.}}</div>
+            {{/error}}
+            {{#info}}
+                <div>{{.}}</div>
+            {{/info}}
+        {{/flashes}}
