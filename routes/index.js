@@ -7,6 +7,7 @@ const router = express.Router();
 router.get('/', homeController.index)
 
 router.get('/users/login', userController.login)
+
 router.get('/post/add', postController.add)
 router.post('/post/add', postController.addAction)
 

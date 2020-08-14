@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 require('dotenv').config({path:'variable.env'})
 
 
-
+//Connect db
 mongoose.connect(process.env.DATABASE, { useNewUrlParser: true , useUnifiedTopology: true });
 mongoose.Promise = global.Promise;
 mongoose.connection.on('error', (error) => {
@@ -11,7 +11,10 @@ mongoose.connection.on('error', (error) => {
 });
 
 
+//Loading models
 require("./models/Post")
+
+//Load app
 const app = require('./app');
 
 
