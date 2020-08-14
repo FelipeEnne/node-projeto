@@ -8,7 +8,15 @@ exports.add = (req, res)=>{
 
 exports.addAction = async (req, res)=>{
     const post = new Post(req.body);
-    await post.save();
+
+    try{
+        await post.save();
+    } catch(error){
+        req.flash('error', 'Erro '+error.message);
+        res.redirect('/post/add');
+        return;
+    }
+    
 
     req.flash('sucess','post salvo')
 
