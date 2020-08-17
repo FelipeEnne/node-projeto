@@ -14,7 +14,8 @@
     </label>
     </br>
     <label>
-        Tags
+        Tags: (separar por vírgula)
+        <input type="text" name="tags"/>
     </label>
     </br>
     <input type="submit" name="Salvar"/>
