@@ -7,16 +7,16 @@
         Titulo:
         <input type="text" name="title"/>
     </label>
-    </br>
+    <br>
     <label>
         Corpo:
         <textarea name="body"></textarea>
     </label>
-    </br>
+    <br>
     <label>
         Tags: (separar por vírgula)
         <input type="text" name="tags"/>
     </label>
-    </br>
+    <br>
     <input type="submit" name="Salvar"/>
 </form>

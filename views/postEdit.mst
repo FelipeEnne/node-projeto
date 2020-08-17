@@ -7,16 +7,16 @@
         Titulo:
         <input type="text" name="title" value={{post.title}}/>
     </label>
-    </br>
+    <br>
     <label>
         Corpo:
         <textarea name="body">{{post.body}}</textarea>
     </label>
-    </br>
+    <br>
     <label>
         Tags: (separar por vírgula)
         <input type="text" name="tags" value={{post.tags}} />
     </label>
-    </br>
+    <br>
     <input type="submit" name="Salvar"/>
 </form>

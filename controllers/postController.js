@@ -1,14 +1,18 @@
 const mongoose = require('mongoose');
 const Post = mongoose.model('Post')
 
-exports.add = (req, res)=>{
 
+exports.view = async (req, res) => {
+    const post = await Post.findOne({ slug:req.params.slug });
+    res.render('view', {post});
+}
+
+exports.add = (req, res)=>{
     res.render('postAdd')
 }
 
 exports.addAction = async (req, res)=>{
     req.body.tags = req.body.tags.split(',').map(t => t.trim());
-
 
     const post = new Post(req.body);
 
