@@ -2,9 +2,10 @@
     <head>
 
         <title>{{pageTitle}}  {{h.defaultPageTitle}}</title>
-
+        <link rel="stylesheet" href="/assets/css/style.css" />
     </head>
     <body>
+    <header>
         <h1>Cabeçalho</h1>
         <hr/>
         <ul>
@@ -12,15 +13,18 @@
                 <li><a href="{{slug}}">{{name}}</a></li>
             {{/h.menu}}
         </ul>
+    </header>
         <hr/>
         {{#flashes}}
-            {{#sucess}}
-                <div>{{.}}</div>
-            {{/sucess}}
-            {{#error}}
-                <div>{{.}}</div>
-            {{/error}}
-            {{#info}}
-                <div>{{.}}</div>
-            {{/info}}
+            <div>
+                {{#sucess}}
+                    <div class="warning">{{.}}</div>
+                {{/sucess}}
+                {{#error}}
+                    <div class="warning">{{.}}</div>
+                {{/error}}
+                {{#info}}
+                    <div class="warning">{{.}}</div>
+                {{/info}}
+            </div>
         {{/flashes}}

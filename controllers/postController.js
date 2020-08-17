@@ -24,9 +24,7 @@ exports.addAction = async (req, res)=>{
         return;
     }
     
-
     req.flash('sucess','post salvo')
-
     res.redirect('/')
 }
 
@@ -56,7 +54,5 @@ exports.editAction = async (req, res) => {
     }
     
     req.flash('sucess', 'Post atualizado com sucesso');
-
-
     res.redirect('/');
 }
