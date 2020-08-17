@@ -7,7 +7,7 @@ exports.add = (req, res)=>{
 }
 
 exports.addAction = async (req, res)=>{
-    req.body.tags = req.body.tags.split(',').map(t => t.trim())
+    req.body.tags = req.body.tags.split(',').map(t => t.trim());
 
 
     const post = new Post(req.body);
@@ -34,6 +34,7 @@ exports.edit = async (req, res) => {
 
 exports.editAction = async (req, res) => {
     req.body.slug = require('slug')(req.body.title, {lower:true});
+    req.body.tags = req.body.tags.split(',').map(t => t.trim());
 
     try{
         const post = await Post.findOneAndUpdate(
