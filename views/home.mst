@@ -2,4 +2,8 @@
 
 <h1>HOME</h1>
 
-<p>Usuário: {{userInfo.name}}</p>
+{{#posts}}
+    <h3><a href="/post/{{slug}}">{{title}}</a></h3>
+    <p>{{body}}</p>
+    <hr/>
+{{/posts}}
