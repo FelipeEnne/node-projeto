@@ -4,6 +4,12 @@ exports.login = (req, res)=>{
     res.render('login')
 };
 
+exports.logout = (req, res)=>{
+    req.logout();
+    res.redirect('/')
+};
+
+
 exports.loginAction = (req, res)=>{
     const auth = User.authenticate()
 
@@ -13,6 +19,8 @@ exports.loginAction = (req, res)=>{
             res.redirect('/users/login')
             return
         }
+
+        req.login(result, ()=>{})
         req.flash('success','Logado')
         res.redirect('/')
     })
