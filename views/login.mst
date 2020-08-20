@@ -2,7 +2,21 @@
 
 <h1>Login</h1>
 
-<form>
-    <input type='text' name='user'/>
-    <button> Entrar</button>
+<form method="POST">
+
+    <label>
+        Email:
+        <input type="email" name="email" />
+    </label>
+    <br/>
+    <label>
+        Senha:
+        <input type="password" name="password" />
+    </label>
+    <br/>
+    <label>
+        <input type="submit" value="Logar" />
+    </label>
+
+
 </form>

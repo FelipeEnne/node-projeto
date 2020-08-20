@@ -17,9 +17,9 @@
         <hr/>
         {{#flashes}}
             <div>
-                {{#sucess}}
+                {{#success}}
                     <div class="warning">{{.}}</div>
-                {{/sucess}}
+                {{/success}}
                 {{#error}}
                     <div class="warning">{{.}}</div>
                 {{/error}}
