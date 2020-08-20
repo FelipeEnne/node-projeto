@@ -34,8 +34,8 @@ app.use((req,res,next) => {
 app.use(passport.initialize());
 app.use(passport.session());
 
-const User = require('./model/User');
-passport.use(new LocalStratege(User.authenticate()));
+const User = require('./models/User');
+passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
