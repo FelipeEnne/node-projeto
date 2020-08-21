@@ -34,9 +34,16 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req,res,next) => {
-    res.locals.h = helper;
+    res.locals.h = {...helper};
     res.locals.flashes = req.flash();
     res.locals.user = req.user;
+
+    if(req.isAuthenticated()){
+        res.locals.h.menu = res.locals.h.menu.filter(i=> i.logged);
+    } else{
+        res.locals.h.menu = res.locals.h.menu.filter(i=>i.guest);
+    }
+
     next();
 })
 
