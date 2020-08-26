@@ -63,3 +63,16 @@ exports.profileAction = async (req, res) => {
     req.flash('success', 'Dados atualizados com sucesso');
     res.redirect('/profile');
 };
+
+exports.forget = (req, res) => {
+    res.render('/forget')
+}
+
+exports.forgetAction = async (req, res) => {
+    const user = await User.findOne({email:req.body.email}).exec();
+    if(!user) {
+        req.flash('error', 'E-mail não cadastrado');
+        res.redirect('/user/forget');
+        return;
+    }
+}

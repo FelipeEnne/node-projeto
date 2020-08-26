@@ -3,7 +3,6 @@
 <h1>Login</h1>
 
 <form method="POST">
-
     <label>
         Email:
         <input type="email" name="email" />
@@ -17,6 +16,6 @@
     <label>
         <input type="submit" value="Logar" />
     </label>
-
-
 </form>
+
+<a href="/user/forget">Esqueci a minha senha</a>
