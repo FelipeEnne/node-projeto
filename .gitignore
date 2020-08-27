@@ -1,2 +1,3 @@
 # Vendors
 node_modules/
+variable.env
