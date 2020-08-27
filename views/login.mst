@@ -18,4 +18,4 @@
     </label>
 </form>
 
-<a href="/user/forget">Esqueci a minha senha</a>
+<a href="/users/forget">Esqueci a minha senha</a>

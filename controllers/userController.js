@@ -1,4 +1,5 @@
-const User = require('../models/User')
+const User = require('../models/User');
+const crypto = require('crypto');
 
 exports.login = (req, res)=>{
     res.render('login')
@@ -65,14 +66,64 @@ exports.profileAction = async (req, res) => {
 };
 
 exports.forget = (req, res) => {
-    res.render('/forget')
+    res.render('forget');
 }
 
 exports.forgetAction = async (req, res) => {
     const user = await User.findOne({email:req.body.email}).exec();
     if(!user) {
         req.flash('error', 'E-mail não cadastrado');
-        res.redirect('/user/forget');
+        res.redirect('/users/forget');
         return;
     }
+
+    user.resetPasswordToken = crypto.randomBytes(20).toString('hex');
+    user.resetPasswordExpires = Date.now() + 3600000;
+    await user.save();
+
+    const resetLink = `http://${req.headers.host}/users/reset/${user.resetPasswordToken}`;
+
+    req.flash('success', 'Te enviamos um email '+resetLink);
+    res.redirect('/users/login');
+}
+
+exports.forgetToken = async (req, res) => {
+    const user = await User.findOne({
+        resetPasswordToken: req.params.token,
+        resetPasswordExpires: { $gt: Date.now() }
+    });
+
+    if(!user) {
+        req.flash('error', 'Token expirado');
+        res.redirect('/users/forget');
+        return;
+    }
+
+    res.render('forgetPassword');
+};
+
+exports.forgetTokenAction = async (req,res)=>{
+    const user = await User.findOne({
+        resetPasswordToken: req.params.token,
+        resetPasswordExpires: { $gt: Date.now() }
+    });
+
+    if(!user) {
+        req.flash('error', 'Token expirado');
+        res.redirect('/users/forget');
+        return;
+    }
+
+    if(req.body.password != req.body['password-confirm']) {
+        req.flash('error', 'Senhas não são iguais');
+        res.redirect('back');
+        return
+    }
+
+    user.setPassword(req.body.password, async () => {
+        await user.save();
+        req.flash('success','Senha alterada');
+        res.redirect('/');
+    })
+
 }
