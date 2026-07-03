@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const slug = require('slug')
+const slug = require('slug').default;
 
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
