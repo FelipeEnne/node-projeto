@@ -1,11 +1,11 @@
 const multer = require('multer');
-const jimp = require('jimp');
-const uuid = require('uuid');
+const { Jimp } = require('jimp');
+const { v4: uuidv4 } = require('uuid');
 
 const multerOptions = {
     storage:multer.memoryStorage(),
     fileFilter:(req, file, next)=>{
-        const allowed = ['image/jpeg', 'image/jpg', 'image/pnj'];
+        const allowed = ['image/jpeg', 'image/jpg', 'image/png'];
         if(allowed.includes(file.mimetype)) {
             next(null, true);
         } else {
@@ -23,11 +23,11 @@ exports.resize = async (req, res, next) => {
     }
 
     const ext = req.file.mimetype.split('/')[1];
-    let filename = `${uuid.v4()}.${ext}`;
+    let filename = `${uuidv4()}.${ext}`;
     req.body.photo = filename;
 
-    const photo = await jimp.read(req.file.buffer);
-    await photo.resize(800, jimp.AUTO);
+    const photo = await Jimp.read(req.file.buffer);
+    photo.resize({ w: 800 });
     await photo.write(`./public/media/${filename}`);
     next();
 

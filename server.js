@@ -4,12 +4,7 @@ require('dotenv').config({path:'variable.env'})
 
 
 //Connect db
-mongoose.connect(process.env.DATABASE, { 
-    useNewUrlParser: true , 
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-});
-mongoose.Promise = global.Promise;
+mongoose.connect(process.env.DATABASE);
 mongoose.connection.on('error', (error) => {
     console.error('Error: '+ error.message);
 });

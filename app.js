@@ -20,7 +20,7 @@ app.use(cookieParser(process.env.SECRET));
 app.use(session({
     secret: process.env.SECRET,
     resave:false,
-    saveUnitialized:false
+    saveUninitialized:false
 }));
 
 app.use(flash());
