@@ -14,7 +14,13 @@ Aplicação web de blog em Node.js com autenticação de usuários, criação e 
 npm install
 ```
 
-Crie o arquivo `variable.env` na raiz do projeto com as variáveis abaixo e inicie o servidor:
+Copie o arquivo de exemplo e preencha as variáveis:
+
+```bash
+cp variable.env.example variable.env
+```
+
+Edite `variable.env` e inicie o servidor:
 
 ```bash
 npm start
@@ -24,7 +30,7 @@ O servidor sobe na porta definida em `PORT` (padrão `7777`).
 
 ## Variáveis de ambiente
 
-Configure o arquivo `variable.env`:
+Configure o arquivo `variable.env` a partir de [`variable.env.example`](variable.env.example):
 
 ```env
 DATABASE=mongodb://localhost:27017/blog
@@ -39,17 +45,7 @@ SMTP_NAME=Blog
 SMTP_EMAIL=noreply@exemplo.com
 ```
 
-| Variável | Descrição |
-|----------|-----------|
-| `DATABASE` | URI de conexão do MongoDB |
-| `PORT` | Porta HTTP do servidor |
-| `SECRET` | Segredo para cookies e sessão |
-| `SMTP_HOST` | Host do servidor SMTP |
-| `SMTP_PORT` | Porta do servidor SMTP |
-| `SMTP_USER` | Usuário SMTP |
-| `SMTP_PASS` | Senha SMTP |
-| `SMTP_NAME` | Nome exibido no remetente |
-| `SMTP_EMAIL` | E-mail do remetente |
+Detalhes de cada variável: [docs/configuration.md](docs/configuration.md).
 
 ## Scripts
 
@@ -66,6 +62,15 @@ SMTP_EMAIL=noreply@exemplo.com
 - Criação e edição de posts (autenticado)
 - Upload e redimensionamento de imagens (largura máxima 800px)
 
+## Documentação
+
+| Documento | Conteúdo |
+|-----------|----------|
+| [Arquitetura](docs/architecture.md) | Boot, camadas, auth, upload e e-mail |
+| [Rotas](docs/routes.md) | Mapa completo de endpoints |
+| [Modelos](docs/models.md) | Schemas User e Post |
+| [Configuração](docs/configuration.md) | Variáveis de ambiente e requisitos |
+
 ## Estrutura do projeto
 
 ```
@@ -73,6 +78,8 @@ SMTP_EMAIL=noreply@exemplo.com
 ├── app.js                 # Configuração do Express, sessão e Passport
 ├── server.js              # Conexão com MongoDB e start do servidor
 ├── helpers.js             # Helpers de view (menu, título)
+├── variable.env.example   # Modelo de variáveis de ambiente
+├── docs/                  # Documentação detalhada
 ├── controllers/           # Lógica de rotas (home, posts, usuários)
 ├── models/                # Schemas Mongoose (User, Post)
 ├── routes/                # Definição das rotas
