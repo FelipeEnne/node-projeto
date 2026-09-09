@@ -3,6 +3,7 @@
 <h2>Adicionar Post</h2>
 
 <form method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}"/>
     <label>
         Imagem:
         <input type='file' name='photo'/>

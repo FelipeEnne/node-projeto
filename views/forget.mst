@@ -3,6 +3,7 @@
 <h1>Esqueci senha</h1>
 
 <form method="POST">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}"/>
     <label>
         Email:
         <input type="email" name="email" />

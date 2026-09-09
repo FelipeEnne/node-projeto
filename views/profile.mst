@@ -3,14 +3,15 @@
 <h2>Meu perfil</h2>
 
 <form method="POST">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}"/>
     <label>
         Nome Completo:
-        <input type="text" name="name" value={{user.name}}/>
+        <input type="text" name="name" value="{{user.name}}"/>
     </label>
     <br>
     <label>
         E-mail:
-        <input type="email" name="email" value={{user.email}} />
+        <input type="email" name="email" value="{{user.email}}" />
     </label>
     <br>
     <input type="submit" name="Salvar"/>
@@ -19,6 +20,12 @@
 <hr>
 
 <form method="POST" action="/profile/password">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}"/>
+    <label>
+        Senha Atual:
+        <input type="password" name="password-current"/>
+    </label>
+    <br>
     <label>
         Nova Senha:
         <input type="password" name="password"/>

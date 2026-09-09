@@ -3,6 +3,7 @@
 <h1>Cadastro</h1>
 
 <form method="POST">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}"/>
     <label>
         Nome:
         <input type="text" name="name" />

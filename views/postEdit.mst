@@ -2,7 +2,8 @@
 
 <h2>Editar Post</h2>
 
-<form method="POST"enctype="multipart/form-data">
+<form method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}"/>
     <label>
         Imagem:
         <input type='file' name='photo'/>
@@ -13,7 +14,7 @@
     <br>
     <label>
         Titulo:
-        <input type="text" name="title" value={{post.title}}/>
+        <input type="text" name="title" value="{{post.title}}"/>
     </label>
     <br>
     <label>
@@ -23,7 +24,7 @@
     <br>
     <label>
         Tags: (separar por vírgula)
-        <input type="text" name="tags" value={{post.tags}} />
+        <input type="text" name="tags" value="{{post.tags}}" />
     </label>
     <br>
     <input type="submit" name="Salvar"/>

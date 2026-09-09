@@ -13,7 +13,17 @@
         <hr/>
         <ul>
             {{#h.menu}}
-                <li><a href="{{slug}}">{{name}}</a></li>
+                <li>
+                    {{#post}}
+                    <form method="POST" action="{{slug}}" style="display:inline">
+                        <input type="hidden" name="_csrf" value="{{csrfToken}}"/>
+                        <button type="submit" style="background:none;border:none;padding:0;color:inherit;text-decoration:underline;cursor:pointer;font:inherit">{{name}}</button>
+                    </form>
+                    {{/post}}
+                    {{^post}}
+                    <a href="{{slug}}">{{name}}</a>
+                    {{/post}}
+                </li>
             {{/h.menu}}
         </ul>
     </header>
