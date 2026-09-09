@@ -27,9 +27,23 @@ exports.loginAction = (req, res)=>{
             return
         }
 
-        req.login(result, ()=>{})
-        req.flash('success','Logado')
-        res.redirect('/')
+        req.session.regenerate((regenErr) => {
+            if (regenErr) {
+                req.flash('error', 'Erro ao iniciar sessão');
+                res.redirect('/users/login');
+                return;
+            }
+
+            req.login(result, (loginErr) => {
+                if (loginErr) {
+                    req.flash('error', 'Erro ao iniciar sessão');
+                    res.redirect('/users/login');
+                    return;
+                }
+                req.flash('success','Logado')
+                res.redirect('/')
+            });
+        });
     })
 };
 
@@ -38,7 +52,10 @@ exports.register = (req, res)=>{
 };
 
 exports.registerAction = (req, res) => {
-    const newUser = new User(req.body)
+    const newUser = new User({
+        name: req.body.name,
+        email: req.body.email
+    });
     User.register(newUser, req.body.password, (error)=>{
         if(error) {
             req.flash('error', 'Tente mais tarde')
@@ -57,13 +74,13 @@ exports.profile = (req, res) => {
 
 exports.profileAction = async (req, res) => {
     try{
-        const user = await User.findOneAndUpdate(
+        await User.findOneAndUpdate(
             { _id:req.user._id},
             { name:req.body.name, email:req.body.email },
             { new:true, runValidators:true }
         );
     } catch(e) {
-        req.flash('error', 'Ocorreu um erro: '+e.message);
+        req.flash('error', 'Não foi possível atualizar os dados');
         res.redirect('/profile');
         return;
     }
@@ -76,10 +93,11 @@ exports.forget = (req, res) => {
 }
 
 exports.forgetAction = async (req, res) => {
+    const genericMessage = 'Se o e-mail estiver cadastrado, enviaremos instruções';
     const user = await User.findOne({email:req.body.email}).exec();
     if(!user) {
-        req.flash('error', 'E-mail não cadastrado');
-        res.redirect('/users/forget');
+        req.flash('success', genericMessage);
+        res.redirect('/users/login');
         return;
     }
 
@@ -87,7 +105,8 @@ exports.forgetAction = async (req, res) => {
     user.resetPasswordExpires = Date.now() + 3600000;
     await user.save();
 
-    const resetLink = `http://${req.headers.host}/users/reset/${user.resetPasswordToken}`;
+    const baseUrl = (process.env.APP_URL || '').replace(/\/$/, '');
+    const resetLink = `${baseUrl}/users/reset/${user.resetPasswordToken}`;
 
     const to = `${user.name} <${user.email}>`;
     const html = `Testando email com link: <br/> <a href="${resetLink}">Resetar Senha</a>`;
@@ -99,7 +118,7 @@ exports.forgetAction = async (req, res) => {
         text
     })
 
-    req.flash('success', 'Te enviamos um email ');
+    req.flash('success', genericMessage);
     res.redirect('/users/login');
 }
 
@@ -136,10 +155,17 @@ exports.forgetTokenAction = async (req,res)=>{
         return
     }
 
-    user.setPassword(req.body.password, async () => {
+    user.setPassword(req.body.password, async (err) => {
+        if (err) {
+            req.flash('error', 'Não foi possível alterar a senha');
+            res.redirect('back');
+            return;
+        }
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpires = undefined;
         await user.save();
         req.flash('success','Senha alterada');
-        res.redirect('/');
+        res.redirect('/users/login');
     })
 
 }

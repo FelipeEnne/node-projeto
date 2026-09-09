@@ -10,9 +10,10 @@ exports.index = async (req, res)=>{
         tag:''
     };
 
-    responseJson.tag = req.query.t;
+    const tag = typeof req.query.t === 'string' ? req.query.t : '';
+    responseJson.tag = tag;
 
-    const postFilter  = (typeof responseJson.tag != 'undefined') ? {tags:responseJson.tag}:{};
+    const postFilter = tag ? { tags: tag } : {};
 
     const tagsPromise = Post.getTagsList();
     const postsPromise = Post.find(postFilter).populate('author');
@@ -20,7 +21,12 @@ exports.index = async (req, res)=>{
     const [tags, posts] = await Promise.all([ tagsPromise, postsPromise ]);
 
     responseJson.tags = tags;
-    responseJson.posts = posts;
+    const userId = req.user && req.user._id ? String(req.user._id) : null;
+    responseJson.posts = posts.map(post => {
+        const obj = post.toObject();
+        obj.canEdit = !!(userId && post.author && String(post.author._id) === userId);
+        return obj;
+    });
 
     for(let i in tags) {
         if(tags[i]._id == responseJson.tag) {
