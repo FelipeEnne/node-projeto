@@ -30,6 +30,8 @@ cp variable.env.example variable.env
 | `DATABASE` | sim | URI de conexão do MongoDB |
 | `PORT` | não | Porta HTTP (padrão `7777`) |
 | `SECRET` | sim | Segredo para cookies e sessão |
+| `APP_URL` | para reset | URL base da app (ex.: `http://localhost:7777`); usada no link de reset de senha |
+| `NODE_ENV` | não | Se for `production`, cookies de sessão usam `secure: true` |
 | `SMTP_HOST` | para reset | Host do servidor SMTP |
 | `SMTP_PORT` | para reset | Porta SMTP |
 | `SMTP_USER` | para reset | Usuário SMTP |
@@ -43,6 +45,7 @@ Exemplo (também em [`variable.env.example`](../variable.env.example)):
 DATABASE=mongodb://localhost:27017/blog
 PORT=7777
 SECRET=uma-chave-secreta-forte
+APP_URL=http://localhost:7777
 
 SMTP_HOST=smtp.exemplo.com
 SMTP_PORT=587
@@ -55,6 +58,12 @@ SMTP_EMAIL=noreply@exemplo.com
 ## Sessão
 
 `express-session` usa store **em memória** por padrão. Adequado para desenvolvimento; em produção com vários processos, use um store persistente (por exemplo Redis ou Mongo).
+
+Cookies de sessão:
+
+- `httpOnly: true`
+- `sameSite: 'lax'`
+- `secure: true` quando `NODE_ENV === 'production'`
 
 ## Subir a aplicação
 
