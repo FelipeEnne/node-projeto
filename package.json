@@ -5,7 +5,7 @@
     "node": ">=24 <25"
   },
   "scripts": {
-    "start": "nodemon ./server.js",
+    "start": "node --watch ./server.js",
     "test": "node --test --test-isolation=none"
   },
   "dependencies": {
@@ -27,9 +27,6 @@
     "sharp": "^0.35.5",
     "slug": "^10.0.0",
     "uuid": "^11.1.1"
-  },
-  "devDependencies": {
-    "nodemon": "^3.1.0"
   },
   "overrides": {
     "async": "^3.2.6",

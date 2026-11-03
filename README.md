@@ -52,7 +52,7 @@ Detalhes de cada variável: [docs/configuration.md](docs/configuration.md).
 
 | Comando | Descrição |
 |---------|-----------|
-| `npm start` | Inicia o servidor com nodemon (`server.js`) |
+| `npm start` | Inicia o servidor com reinicialização automática (`node --watch`) |
 | `npm test` | Executa os testes automatizados |
 
 ## Funcionalidades
