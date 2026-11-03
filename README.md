@@ -4,7 +4,7 @@ Aplicação web de blog em Node.js com autenticação de usuários, criação e 
 
 ## Requisitos
 
-- [Node.js](https://nodejs.org/) LTS (recomendado 18+)
+- [Node.js](https://nodejs.org/) 24.x
 - [MongoDB](https://www.mongodb.com/) em execução (local ou remoto)
 - Conta SMTP (para envio de e-mails de reset de senha)
 
@@ -53,6 +53,7 @@ Detalhes de cada variável: [docs/configuration.md](docs/configuration.md).
 | Comando | Descrição |
 |---------|-----------|
 | `npm start` | Inicia o servidor com nodemon (`server.js`) |
+| `npm test` | Executa os testes automatizados |
 
 ## Funcionalidades
 
@@ -105,5 +106,5 @@ Detalhes de cada variável: [docs/configuration.md](docs/configuration.md).
 - Passport (local) + passport-local-mongoose
 - Mustache (mustache-express)
 - Helmet, csrf, express-rate-limit
-- Multer + Jimp (upload e resize de imagens)
+- Multer + Sharp (upload e resize de imagens)
 - Nodemailer (e-mail)

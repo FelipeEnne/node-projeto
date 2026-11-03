@@ -1,5 +1,5 @@
 const multer = require('multer');
-const { Jimp } = require('jimp');
+const sharp = require('sharp');
 const { v4: uuidv4 } = require('uuid');
 
 const multerOptions = {
@@ -38,13 +38,13 @@ exports.resize = async (req, res, next) => {
     }
 
     try {
-        const ext = req.file.mimetype.split('/')[1];
-        let filename = `${uuidv4()}.${ext}`;
+        const ext = req.file.mimetype === 'image/png' ? 'png' : 'jpg';
+        const filename = `${uuidv4()}.${ext}`;
         req.body.photo = filename;
 
-        const photo = await Jimp.read(req.file.buffer);
-        photo.resize({ w: 800 });
-        await photo.write(`./public/media/${filename}`);
+        await sharp(req.file.buffer)
+            .resize({ width: 800 })
+            .toFile(`./public/media/${filename}`);
         next();
     } catch (error) {
         req.flash('error', 'Não foi possível processar a imagem');

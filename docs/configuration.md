@@ -2,7 +2,7 @@
 
 ## Requisitos
 
-- Node.js LTS 18+
+- Node.js 24.x
 - MongoDB (local ou remoto)
 - Conta SMTP para e-mails de recuperação de senha
 

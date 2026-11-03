@@ -82,7 +82,7 @@ Em [`middlewares/imageMiddleware.js`](../middlewares/imageMiddleware.js):
 
 1. Multer grava o arquivo em memória (`single('photo')`)
 2. Aceita apenas JPEG/PNG; limite de **5MB**
-3. Jimp redimensiona para largura 800px
+3. Sharp redimensiona para largura 800px
 4. Salva em `public/media/` com nome UUID
 5. Define `req.body.photo` com o nome do arquivo
 
